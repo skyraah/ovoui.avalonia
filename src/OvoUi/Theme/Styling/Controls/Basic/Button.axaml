@@ -1,4 +1,7 @@
-<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:ovo="https://github.com/tiouoo/ovoui.avalonia"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.PreviewWith>
         <StackPanel
             Margin="16"
@@ -46,11 +49,7 @@
         <Setter Property="FontWeight" Value="{DynamicResource OvoFontWeight}" />
         <Setter Property="FontFamily" Value="{DynamicResource OvoFontFamily}" />
         <Setter Property="Transitions">
-            <Transitions>
-                <BrushTransition Duration="0:0:0.1" Property="Background" />
-                <BrushTransition Duration="0:0:0.1" Property="Foreground" />
-                <BrushTransition Duration="0:0:0.1" Property="BorderBrush" />
-            </Transitions>
+            <ovo:OvoTransitions />
         </Setter>
         <Setter Property="Template">
             <ControlTemplate TargetType="Button">
@@ -88,6 +87,7 @@
         TargetType="Button"
         x:Key="BorderButtonTheme">
         <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Background" Value="{DynamicResource PopupBackgroundBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
         <Setter Property="CornerRadius" Value="{DynamicResource OvoCornerRadius}" />
         <Setter Property="Padding" Value="20, 8" />

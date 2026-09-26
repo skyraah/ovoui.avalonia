@@ -279,13 +279,11 @@
 
     </ControlTheme>
 
-
-
     <ControlTheme
         BasedOn="{StaticResource LooklessTextBoxTheme}"
         TargetType="TextBox"
         x:Key="BorderTextBoxTheme">
-        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Background" Value="{DynamicResource PopupBackgroundBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
 
         <Style Selector="^:focus">

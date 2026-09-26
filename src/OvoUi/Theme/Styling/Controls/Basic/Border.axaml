@@ -1,0 +1,32 @@
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:ovo="https://github.com/tiouoo/ovoui.avalonia"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Design.PreviewWith>
+        <StackPanel Margin="20" Spacing="20">
+            <Border Theme="{StaticResource CardBorderTheme}">
+                <TextBlock>Hello</TextBlock>
+            </Border>
+            <Border Classes="interactive" Theme="{StaticResource CardBorderTheme}">
+                <TextBlock>Hello</TextBlock>
+            </Border>
+        </StackPanel>
+    </Design.PreviewWith>
+
+    <ControlTheme TargetType="Border" x:Key="CardBorderTheme">
+        <Setter Property="Padding" Value="20" />
+        <Setter Property="Background" Value="{DynamicResource PopupBackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+        <Setter Property="BorderThickness" Value="1.2" />
+        <Setter Property="CornerRadius" Value="{DynamicResource OvoBigCornerRadius}" />
+        <Setter Property="Transitions">
+            <ovo:OvoTransitions />
+        </Setter>
+
+        <Style Selector="^.interactive:pointerover">
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColor}" />
+        </Style>
+    </ControlTheme>
+
+</ResourceDictionary>
