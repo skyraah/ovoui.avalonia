@@ -4,5 +4,6 @@
         <ResourceInclude Source="ToggleButton.axaml" />
         <ResourceInclude Source="TextBox.axaml" />
         <ResourceInclude Source="AdornerLayer.axaml" />
+        <ResourceInclude Source="Button.axaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
