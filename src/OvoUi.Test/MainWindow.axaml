@@ -13,35 +13,31 @@
             HorizontalAlignment="Center"
             Spacing="10"
             VerticalAlignment="Center">
-            <ToggleButton Theme="{StaticResource InputToggleButtonTheme}" />
-            <TextBox MinWidth="200" PlaceholderText="Input" />
-            <TextBox
-                Classes="clear"
-                MinWidth="200"
-                PlaceholderText="Input" />
-            <TextBox
-                Classes="border"
-                MinWidth="200"
-                PlaceholderText="Input" />
-            <TextBox
-                Classes="border clear"
-                MinWidth="200"
-                PlaceholderText="Input" />
-            <TextBox
-                Classes="border_focus"
-                MinWidth="200"
-                PlaceholderText="Input" />
-            <TextBox
-                Classes="reveal_password"
-                MinWidth="200"
-                PlaceholderText="Input" />
-            <TextBox Classes="text_area" PlaceholderText="Input" />
-            <TextBox PlaceholderText="Input" Theme="{StaticResource LooklessTextBoxTheme}" />
-            <TextBox
-                Classes="reveal_password"
-                PlaceholderText="Input"
-                Theme="{StaticResource BorderTextBoxTheme}" />
-            <TextBox MinWidth="200" PlaceholderText="Input" />
+            <ComboBox Width="200">
+                <ComboBoxItem>Hello World</ComboBoxItem>
+                <ComboBoxItem>Hello World</ComboBoxItem>
+                <ComboBoxItem IsSelected="True">Hello World</ComboBoxItem>
+            </ComboBox>
+            <ComboBox Theme="{StaticResource BareComboBoxTheme}" Width="200">
+                <ComboBoxItem>Hello World</ComboBoxItem>
+                <ComboBoxItem>Hello World</ComboBoxItem>
+                <ComboBoxItem IsSelected="True">Hello World</ComboBoxItem>
+            </ComboBox>
+            <ComboBox Theme="{StaticResource LooklessComboBoxTheme}" Width="200">
+                <ComboBoxItem>Hello World</ComboBoxItem>
+                <ComboBoxItem>Hello World</ComboBoxItem>
+                <ComboBoxItem IsSelected="True">Hello World</ComboBoxItem>
+            </ComboBox>
+            <ComboBox Theme="{StaticResource BasicComboBoxTheme}" Width="200">
+                <ComboBoxItem>Hello World</ComboBoxItem>
+                <ComboBoxItem>Hello World</ComboBoxItem>
+                <ComboBoxItem IsSelected="True">Hello World</ComboBoxItem>
+            </ComboBox>
+            <ComboBox Theme="{StaticResource BorderComboBoxTheme}" Width="200">
+                <ComboBoxItem>Hello World</ComboBoxItem>
+                <ComboBoxItem>Hello World</ComboBoxItem>
+                <ComboBoxItem IsSelected="True">Hello World</ComboBoxItem>
+            </ComboBox>
         </StackPanel>
         <StackPanel
             HorizontalAlignment="Left"

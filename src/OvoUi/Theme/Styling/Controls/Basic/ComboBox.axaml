@@ -1,11 +1,39 @@
-<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:converters="using:OvoUi.Common.Converter"
+    xmlns:ovo="using:OvoUi.Controls"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.PreviewWith>
-        <StackPanel Height="400" Margin="20">
+        <StackPanel
+            Height="400"
+            Margin="20"
+            Spacing="20">
             <ComboBox Width="200">
                 <ComboBoxItem>Hello World</ComboBoxItem>
                 <ComboBoxItem>Hello World</ComboBoxItem>
                 <ComboBoxItem IsSelected="True">Hello World</ComboBoxItem>
             </ComboBox>
+            <ComboBox Theme="{StaticResource BareComboBoxTheme}" Width="200">
+                <ComboBoxItem>Hello World</ComboBoxItem>
+                <ComboBoxItem>Hello World</ComboBoxItem>
+                <ComboBoxItem IsSelected="True">Hello World</ComboBoxItem>
+            </ComboBox>
+            <ComboBox Theme="{StaticResource LooklessComboBoxTheme}" Width="200">
+                <ComboBoxItem>Hello World</ComboBoxItem>
+                <ComboBoxItem>Hello World</ComboBoxItem>
+                <ComboBoxItem IsSelected="True">Hello World</ComboBoxItem>
+            </ComboBox>
+            <ComboBox Theme="{StaticResource BasicComboBoxTheme}" Width="200">
+                <ComboBoxItem>Hello World</ComboBoxItem>
+                <ComboBoxItem>Hello World</ComboBoxItem>
+                <ComboBoxItem IsSelected="True">Hello World</ComboBoxItem>
+            </ComboBox>
+            <ComboBox Theme="{StaticResource BorderComboBoxTheme}" Width="200">
+                <ComboBoxItem>Hello World</ComboBoxItem>
+                <ComboBoxItem>Hello World</ComboBoxItem>
+                <ComboBoxItem IsSelected="True">Hello World</ComboBoxItem>
+            </ComboBox>
+
         </StackPanel>
     </Design.PreviewWith>
 
@@ -90,11 +118,14 @@
                             Name="ClearButton"
                             Theme="{DynamicResource BasicButtonTheme}"
                             Width="{DynamicResource ComboBoxIconWidth}">
-                            <PathIcon
-                                Data="{DynamicResource Close}"
+                            <TextBlock
+                                FontFamily="{DynamicResource OvoIconFontFamily}"
+                                FontSize="17"
+                                FontWeight="Light"
                                 Foreground="{DynamicResource InnerForegroundBrush}"
-                                Height="11"
-                                Width="16" />
+                                HorizontalAlignment="Center"
+                                Text="&#xe643;"
+                                VerticalAlignment="Center" />
                         </Button>
 
 
@@ -124,26 +155,30 @@
                             Name="PART_Popup"
                             PlacementTarget="Background"
                             WindowManagerAddShadowHint="False">
-                            <Border
-                                Background="{DynamicResource PopupBackgroundBrush}"
-                                BorderBrush="{DynamicResource LineBrush}"
-                                BorderThickness="1"
-                                BoxShadow="{DynamicResource PopupBoxShadow}"
-                                CornerRadius="{DynamicResource OvoCornerRadius}"
-                                HorizontalAlignment="Stretch"
-                                Margin="4"
-                                MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
-                                Name="PopupBorder"
-                                Padding="0,-2">
-                                <ScrollViewer
-                                    HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
-                                    IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
-                                    VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
-                                    <Border Margin="4">
-                                        <ItemsPresenter ItemsPanel="{TemplateBinding ItemsPanel}" Name="PART_ItemsPresenter" />
+                            <LayoutTransformControl Name="PART_PopupTransform">
+                                <ovo:PopupContentExpander ExpandUp="{Binding $parent[Popup].Placement, Converter={x:Static converters:PlacementToExpandUpConverter.Instance}}">
+                                    <Border
+                                        Background="{DynamicResource PopupBackgroundBrush}"
+                                        BorderBrush="{DynamicResource LineBrush}"
+                                        BorderThickness="1"
+                                        BoxShadow="{DynamicResource PopupBoxShadow}"
+                                        CornerRadius="{DynamicResource OvoCornerRadius}"
+                                        HorizontalAlignment="Stretch"
+                                        Margin="4"
+                                        MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
+                                        Name="PopupBorder"
+                                        Padding="0,-2">
+                                        <ScrollViewer
+                                            HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                            IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                                            VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
+                                            <Border Margin="4">
+                                                <ItemsPresenter ItemsPanel="{TemplateBinding ItemsPanel}" Name="PART_ItemsPresenter" />
+                                            </Border>
+                                        </ScrollViewer>
                                     </Border>
-                                </ScrollViewer>
-                            </Border>
+                                </ovo:PopupContentExpander>
+                            </LayoutTransformControl>
                         </Popup>
                     </Grid>
                 </DataValidationErrors>
@@ -159,41 +194,20 @@
             </Style>
         </Style>
 
-        <!--  Pointerover State  -->
-        <Style Selector="^:pointerover">
-            <Setter Property="Background" Value="{DynamicResource ControlPointeroverBackground}" />
-        </Style>
-
-        <!--  Focus State  -->
-        <Style Selector="^:focus">
-            <Setter Property="Background" Value="{DynamicResource ControlPressedBackground}" />
-        </Style>
-        <Style Selector="^.Large">
-            <Setter Property="MinHeight" Value="40" />
-        </Style>
-        <Style Selector="^.Small">
-            <Setter Property="MinHeight" Value="24" />
-        </Style>
-        <!--  Pressed State  -->
-        <Style Selector="^:pressed">
-            <Setter Property="Background" Value="{DynamicResource ControlPressedBackground}" />
-        </Style>
-
-        <Style Selector="^ /template/ PathIcon#DropDownGlyph">
+        <Style Selector="^ /template/ TextBlock#DropDownGlyph">
             <Setter Property="Transitions">
                 <Transitions>
                     <TransformOperationsTransition Duration="0:0:0.12" Property="RenderTransform" />
                 </Transitions>
             </Setter>
         </Style>
-        <Style Selector="^:dropdownopen /template/ PathIcon#DropDownGlyph">
+        <Style Selector="^:dropdownopen /template/ TextBlock#DropDownGlyph">
             <Setter Property="RenderTransform" Value="translate(0px, 0px) rotate(180deg)" />
         </Style>
-        <Style Selector="^:pressed /template/ PathIcon#DropDownGlyph">
+        <Style Selector="^:pressed /template/ TextBlock#DropDownGlyph">
             <Setter Property="RenderTransform" Value="translate(0px, 2px) rotate(0deg)" />
         </Style>
 
-        <!--  Disabled State  -->
         <Style Selector="^:disabled">
             <Setter Property="BorderBrush" Value="Transparent" />
             <Style Selector="^ /template/ ContentControl#ContentPresenter">
@@ -203,7 +217,6 @@
                 <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}" />
             </Style>
         </Style>
-        <!--  Error State  -->
         <Style Selector="^:error">
             <Style Selector="^ /template/ Border#Background">
                 <Setter Property="Background" Value="{DynamicResource DataValidationErrorsBackground}" />
@@ -227,7 +240,7 @@
             <Setter Property="KeyboardNavigation.TabNavigation" Value="Local" />
         </Style>
 
-        <Style Selector="^.Bordered">
+        <Style Selector="^.border">
             <Style Selector="^ /template/ Border#Background">
                 <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
             </Style>
