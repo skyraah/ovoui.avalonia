@@ -31,6 +31,7 @@
 
     <ControlTheme TargetType="CheckBox" x:Key="StandardCheckBoxTheme">
         <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="FontWeight" Value="{DynamicResource OvoFontWeight}" />
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />

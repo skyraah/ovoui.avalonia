@@ -80,6 +80,7 @@
 
     <ControlTheme TargetType="ButtonSpinner" x:Key="{x:Type ButtonSpinner}">
         <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+        <Setter Property="FontWeight" Value="{DynamicResource OvoFontWeight}" />
         <Setter Property="CornerRadius" Value="{DynamicResource OvoCornerRadius}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="MinWidth" Value="300" />
@@ -176,6 +177,7 @@
     </ControlTheme>
 
     <ControlTheme TargetType="ButtonSpinner" x:Key="SplitButtonSpinner">
+        <Setter Property="FontWeight" Value="{DynamicResource OvoFontWeight}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
         <Setter Property="CornerRadius" Value="{DynamicResource OvoCornerRadius}" />
         <Setter Property="MinWidth" Value="200" />
