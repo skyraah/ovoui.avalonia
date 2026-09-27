@@ -1,30 +1,65 @@
+using Avalonia;
 using Avalonia.Animation;
 using Avalonia.Controls;
 using Avalonia.Controls.Documents;
+using Avalonia.Markup.Xaml;
 
 namespace OvoUi.Theme.MarkupExtensions;
 
-public class OvoTransitions : Avalonia.Markup.Xaml.MarkupExtension
+public abstract class OvoTransitionExtension : MarkupExtension
 {
+    protected abstract IEnumerable<AvaloniaProperty> Properties { get; }
+
+    protected virtual TimeSpan Duration =>
+        TimeSpan.FromMilliseconds(100);
+
     public override object ProvideValue(IServiceProvider serviceProvider)
     {
-        return new Transitions
+        var transitions = new Transitions();
+
+        foreach (var property in Properties)
         {
-            new BrushTransition
+            transitions.Add(new BrushTransition
             {
-                Duration = TimeSpan.FromMilliseconds(100),
-                Property = Border.BackgroundProperty
-            },
-            new BrushTransition
-            {
-                Duration = TimeSpan.FromMilliseconds(100),
-                Property = TextElement.ForegroundProperty
-            },
-            new BrushTransition
-            {
-                Duration = TimeSpan.FromMilliseconds(100),
-                Property = Border.BorderBrushProperty
-            }
-        };
+                Duration = Duration,
+                Property = property
+            });
+        }
+
+        return transitions;
     }
+}
+
+public class OvoTransitions : OvoTransitionExtension
+{
+    protected override IEnumerable<AvaloniaProperty> Properties =>
+    [
+        Border.BackgroundProperty,
+        TextElement.ForegroundProperty,
+        Border.BorderBrushProperty
+    ];
+}
+
+public class OvoBackgroundTransitions : OvoTransitionExtension
+{
+    protected override IEnumerable<AvaloniaProperty> Properties =>
+    [
+        Border.BackgroundProperty
+    ];
+}
+
+public class OvoForegroundTransitions : OvoTransitionExtension
+{
+    protected override IEnumerable<AvaloniaProperty> Properties =>
+    [
+        TextElement.ForegroundProperty
+    ];
+}
+
+public class OvoBorderTransitions : OvoTransitionExtension
+{
+    protected override IEnumerable<AvaloniaProperty> Properties =>
+    [
+        Border.BorderBrushProperty
+    ];
 }
