@@ -11,7 +11,7 @@ namespace OvoUi.Controls;
 public sealed class PopupContentExpander : ContentExpander
 {
     private static readonly TimeSpan ExpandDuration = TimeSpan.FromMilliseconds(280);
-    private static readonly TimeSpan FadeDuration = TimeSpan.FromMilliseconds(75);
+    private static readonly TimeSpan FadeDuration = TimeSpan.FromMilliseconds(160);
     private int _animationVersion;
 
     public static readonly StyledProperty<bool> ExpandUpProperty =
@@ -42,16 +42,10 @@ public sealed class PopupContentExpander : ContentExpander
             if (animationVersion != _animationVersion)
                 return;
 
-            Multiplier = 0;
+            Multiplier = ExpandUp ? 1 : 0;
             Opacity = 0;
-            Transitions = new Transitions
+            var transitions = new Transitions
             {
-                new DoubleTransition
-                {
-                    Property = MultiplierProperty,
-                    Duration = ExpandDuration,
-                    Easing = new Avalonia.Animation.Easings.ExponentialEaseOut()
-                },
                 new DoubleTransition
                 {
                     Property = OpacityProperty,
@@ -60,7 +54,19 @@ public sealed class PopupContentExpander : ContentExpander
                 }
             };
 
-            Multiplier = 1;
+            if (!ExpandUp)
+            {
+                transitions.Add(new DoubleTransition
+                {
+                    Property = MultiplierProperty,
+                    Duration = ExpandDuration,
+                    Easing = new Avalonia.Animation.Easings.ExponentialEaseOut()
+                });
+            }
+
+            Transitions = transitions;
+            if (!ExpandUp)
+                Multiplier = 1;
             Opacity = 1;
         }, DispatcherPriority.Render);
     }
@@ -68,7 +74,7 @@ public sealed class PopupContentExpander : ContentExpander
     protected override Size ArrangeOverride(Size finalSize)
     {
         var result = base.ArrangeOverride(finalSize);
-        if (PreserveDesiredSize && ExpandUp)
+        if (PreserveDesiredSize && ExpandUp && Multiplier < 1)
         {
             Clip = new Avalonia.Media.RectangleGeometry(
                 new Rect(0, finalSize.Height * (1 - Multiplier), finalSize.Width, finalSize.Height * Multiplier));
