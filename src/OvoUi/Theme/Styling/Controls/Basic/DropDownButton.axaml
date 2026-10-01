@@ -1,0 +1,270 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <WrapPanel
+            ItemSpacing="16"
+            LineSpacing="16"
+            Margin="16">
+            <DropDownButton Classes="" Content="Click Me" />
+            <DropDownButton Classes="transparent" Content="Click Me" />
+            <DropDownButton Classes="accent" Content="Click Me" />
+            <DropDownButton Classes="info" Content="Click Me" />
+            <DropDownButton Classes="success" Content="Click Me" />
+            <DropDownButton Classes="warn" Content="Click Me" />
+            <DropDownButton Classes="danger" Content="Click Me" />
+            <DropDownButton Content="Click Me" IsEnabled="False" />
+            <DropDownButton Content="Click Me" Theme="{StaticResource BorderDropDownButtonTheme}" />
+            <DropDownButton Content="Click Me" Theme="{StaticResource BorderlessDropDownButtonTheme}" />
+        </WrapPanel>
+    </Design.PreviewWith>
+
+    <ControlTheme TargetType="DropDownButton" x:Key="BasicDropDownButtonTheme">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="FontWeight" Value="{DynamicResource OvoFontWeight}" />
+        <Setter Property="FontFamily" Value="{DynamicResource OvoFontFamily}" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="DropDownButton">
+                <Border
+                    Background="{TemplateBinding Background}"
+                    BackgroundSizing="{TemplateBinding BackgroundSizing}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    Name="PART_Background"
+                    Padding="{TemplateBinding Padding}">
+                    <DockPanel HorizontalSpacing="8">
+                        <TextBlock
+                            DockPanel.Dock="Right"
+                            FontFamily="{DynamicResource OvoIconFontFamily}"
+                            FontSize="21"
+                            FontWeight="Light"
+                            Foreground="{Binding #PART_ContentPresenter.Foreground}"
+                            HorizontalAlignment="Right"
+                            IsHitTestVisible="False"
+                            Margin="0,0,-4,0"
+                            Name="DropDownGlyph"
+                            RenderTransform="translate(0px, 0px) rotate(0deg)"
+                            RenderTransformOrigin="50%,50%"
+                            Text="&#xe623;"
+                            UseLayoutRounding="False"
+                            VerticalAlignment="Center" />
+                        <ContentPresenter
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            Foreground="{TemplateBinding Foreground}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            Name="PART_ContentPresenter"
+                            RecognizesAccessKey="True"
+                            TextElement.FontSize="{TemplateBinding FontSize}"
+                            TextElement.FontWeight="{TemplateBinding FontWeight}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="RecognizesAccessKey" Value="True" />
+        </Style>
+        <Style Selector="^ /template/ TextBlock#DropDownGlyph">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Duration="0:0:0.12" Property="RenderTransform" />
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="^:flyout-open /template/ TextBlock#DropDownGlyph">
+            <Setter Property="RenderTransform" Value="translate(0px, 0px) rotate(180deg)" />
+        </Style>
+        <Style Selector="^:pressed /template/ TextBlock#DropDownGlyph">
+            <Setter Property="RenderTransform" Value="translate(0px, 2px) rotate(0deg)" />
+        </Style>
+
+        <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}" />
+        </Style>
+        <Style Selector="^:pointerover:not(.accent):not(.info):not(.success):not(.warn):not(.danger) /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource ControlPointeroverBackground}" />
+        </Style>
+        <Style Selector="^:pressed:not(.accent):not(.info):not(.success):not(.warn):not(.danger) /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource ControlPressedBackground}" />
+        </Style>
+
+        <Style Selector="^.transparent">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+        <Style Selector="^.accent">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColor}" />
+            <Setter Property="Foreground" Value="#ffffff" />
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="{DynamicResource SystemAccentColorLight1}" />
+            </Style>
+            <Style Selector="^:pressed">
+                <Setter Property="Background" Value="{DynamicResource SystemAccentColorDark1}" />
+            </Style>
+        </Style>
+        <Style Selector="^.info">
+            <Setter Property="Background" Value="{DynamicResource InfoColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource InfoColor}" />
+            <Setter Property="Foreground" Value="#ffffff" />
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="{DynamicResource InfoPointeroverColor}" />
+            </Style>
+            <Style Selector="^:pressed">
+                <Setter Property="Background" Value="{DynamicResource InfoPressedColor}" />
+            </Style>
+        </Style>
+        <Style Selector="^.success">
+            <Setter Property="Background" Value="{DynamicResource SuccessColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SuccessColor}" />
+            <Setter Property="Foreground" Value="#ffffff" />
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="{DynamicResource SuccessPointeroverColor}" />
+            </Style>
+            <Style Selector="^:pressed">
+                <Setter Property="Background" Value="{DynamicResource SuccessPressedColor}" />
+            </Style>
+        </Style>
+        <Style Selector="^.warn">
+            <Setter Property="Background" Value="{DynamicResource WarnColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource WarnColor}" />
+            <Setter Property="Foreground" Value="#ffffff" />
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="{DynamicResource WarnPointeroverColor}" />
+            </Style>
+            <Style Selector="^:pressed">
+                <Setter Property="Background" Value="{DynamicResource WarnPressedColor}" />
+            </Style>
+        </Style>
+        <Style Selector="^.danger">
+            <Setter Property="Background" Value="{DynamicResource ErrorColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ErrorColor}" />
+            <Setter Property="Foreground" Value="#ffffff" />
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="{DynamicResource ErrorPointeroverColor}" />
+            </Style>
+            <Style Selector="^:pressed">
+                <Setter Property="Background" Value="{DynamicResource ErrorPressedColor}" />
+            </Style>
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme
+        BasedOn="{StaticResource BasicDropDownButtonTheme}"
+        TargetType="DropDownButton"
+        x:Key="BorderDropDownButtonTheme">
+        <Setter Property="Background" Value="{DynamicResource PopupBackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="{DynamicResource OvoCornerRadius}" />
+        <Setter Property="Padding" Value="20, 8" />
+
+        <Style Selector="^.transparent">
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+        <Style Selector="^:pointerover:not(.accent):not(.info):not(.success):not(.warn):not(.danger)">
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColor}" />
+        </Style>
+        <Style Selector="^:pressed:not(.accent):not(.info):not(.success):not(.warn):not(.danger)">
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColorLight1}" />
+        </Style>
+
+        <Style Selector="^.accent">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColor}" />
+            <Setter Property="Foreground" Value="{DynamicResource SystemAccentColor}" />
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="{DynamicResource SystemAccentColorOpacity01}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColorLight1}" />
+            </Style>
+            <Style Selector="^:pressed">
+                <Setter Property="Background" Value="{DynamicResource SystemAccentColorOpacity02}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColorDark1}" />
+            </Style>
+        </Style>
+        <Style Selector="^.info">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{DynamicResource InfoColor}" />
+            <Setter Property="Foreground" Value="{DynamicResource InfoColor}" />
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="{DynamicResource InfoColorOpacity01}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource InfoPointeroverColor}" />
+            </Style>
+            <Style Selector="^:pressed">
+                <Setter Property="Background" Value="{DynamicResource InfoColorOpacity02}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource InfoPressedColor}" />
+            </Style>
+        </Style>
+        <Style Selector="^.success">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SuccessColor}" />
+            <Setter Property="Foreground" Value="{DynamicResource SuccessColor}" />
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="{DynamicResource SuccessColorOpacity01}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource SuccessPointeroverColor}" />
+            </Style>
+            <Style Selector="^:pressed">
+                <Setter Property="Background" Value="{DynamicResource SuccessColorOpacity02}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource SuccessPressedColor}" />
+            </Style>
+        </Style>
+        <Style Selector="^.warn">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{DynamicResource WarnColor}" />
+            <Setter Property="Foreground" Value="{DynamicResource WarnColor}" />
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="{DynamicResource WarnColorOpacity01}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource WarnPointeroverColor}" />
+            </Style>
+            <Style Selector="^:pressed">
+                <Setter Property="Background" Value="{DynamicResource WarnColorOpacity02}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource WarnPressedColor}" />
+            </Style>
+        </Style>
+        <Style Selector="^.danger">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ErrorColor}" />
+            <Setter Property="Foreground" Value="{DynamicResource ErrorColor}" />
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="{DynamicResource ErrorColorOpacity01}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource ErrorPointeroverColor}" />
+            </Style>
+            <Style Selector="^:pressed">
+                <Setter Property="Background" Value="{DynamicResource ErrorColorOpacity02}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource ErrorPressedColor}" />
+            </Style>
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme
+        BasedOn="{StaticResource BasicDropDownButtonTheme}"
+        TargetType="DropDownButton"
+        x:Key="SolidDropDownButtonTheme">
+        <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="CornerRadius" Value="{DynamicResource OvoCornerRadius}" />
+        <Setter Property="Padding" Value="20, 8" />
+    </ControlTheme>
+
+    <ControlTheme
+        BasedOn="{StaticResource SolidDropDownButtonTheme}"
+        TargetType="DropDownButton"
+        x:Key="{x:Type DropDownButton}" />
+
+    <ControlTheme
+        BasedOn="{StaticResource BasicDropDownButtonTheme}"
+        TargetType="DropDownButton"
+        x:Key="BorderlessDropDownButtonTheme">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="CornerRadius" Value="{DynamicResource OvoCornerRadius}" />
+        <Setter Property="Padding" Value="20, 8" />
+    </ControlTheme>
+</ResourceDictionary>

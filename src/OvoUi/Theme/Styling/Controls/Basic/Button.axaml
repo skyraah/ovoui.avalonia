@@ -11,7 +11,7 @@
             <Button Classes="info" Content="Click Me" />
             <Button Classes="success" Content="Click Me" />
             <Button Classes="warn" Content="Click Me" />
-            <Button Classes="error" Content="Click Me" />
+            <Button Classes="danger" Content="Click Me" />
             <Button Content="Click Me" IsEnabled="False" />
             <Button Content="Click Me" Theme="{StaticResource BorderButtonTheme}" />
             <Button
@@ -31,7 +31,7 @@
                 Content="Click Me"
                 Theme="{StaticResource BorderButtonTheme}" />
             <Button
-                Classes="error"
+                Classes="danger"
                 Content="Click Me"
                 Theme="{StaticResource BorderButtonTheme}" />
 
@@ -158,7 +158,7 @@
             </Style>
         </Style>
 
-        <Style Selector="^.error">
+        <Style Selector="^.danger">
             <Setter Property="BorderBrush" Value="{DynamicResource ErrorColor}" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="Foreground" Value="{DynamicResource ErrorColor}" />
@@ -188,11 +188,11 @@
             <Setter Property="Background" Value="Transparent" />
         </Style>
 
-        <Style Selector="^:pointerover:not(.accent):not(.info):not(.success):not(.warn):not(.error) /template/ ContentPresenter#PART_ContentPresenter">
+        <Style Selector="^:pointerover:not(.accent):not(.info):not(.success):not(.warn):not(.danger) /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="{DynamicResource ControlPointeroverBackground}" />
         </Style>
 
-        <Style Selector="^:pressed:not(.accent):not(.info):not(.success):not(.warn):not(.error) /template/ ContentPresenter#PART_ContentPresenter">
+        <Style Selector="^:pressed:not(.accent):not(.info):not(.success):not(.warn):not(.danger) /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="{DynamicResource ControlPressedBackground}" />
         </Style>
 
@@ -244,7 +244,7 @@
             </Style>
         </Style>
 
-        <Style Selector="^.error">
+        <Style Selector="^.danger">
             <Setter Property="BorderBrush" Value="{DynamicResource ErrorColor}" />
             <Setter Property="Background" Value="{DynamicResource ErrorColor}" />
             <Setter Property="Foreground" Value="#ffffff" />
