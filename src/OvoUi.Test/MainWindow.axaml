@@ -13,31 +13,8 @@
             HorizontalAlignment="Center"
             Spacing="10"
             VerticalAlignment="Center">
-            <ComboBox Width="200">
-                <ComboBoxItem>Hello World</ComboBoxItem>
-                <ComboBoxItem>Hello World</ComboBoxItem>
-                <ComboBoxItem IsSelected="True">Hello World</ComboBoxItem>
-            </ComboBox>
-            <ComboBox Theme="{StaticResource BareComboBoxTheme}" Width="200">
-                <ComboBoxItem>Hello World</ComboBoxItem>
-                <ComboBoxItem>Hello World</ComboBoxItem>
-                <ComboBoxItem IsSelected="True">Hello World</ComboBoxItem>
-            </ComboBox>
-            <ComboBox Theme="{StaticResource LooklessComboBoxTheme}" Width="200">
-                <ComboBoxItem>Hello World</ComboBoxItem>
-                <ComboBoxItem>Hello World</ComboBoxItem>
-                <ComboBoxItem IsSelected="True">Hello World</ComboBoxItem>
-            </ComboBox>
-            <ComboBox Theme="{StaticResource BasicComboBoxTheme}" Width="200">
-                <ComboBoxItem>Hello World</ComboBoxItem>
-                <ComboBoxItem>Hello World</ComboBoxItem>
-                <ComboBoxItem IsSelected="True">Hello World</ComboBoxItem>
-            </ComboBox>
-            <ComboBox Theme="{StaticResource BorderComboBoxTheme}" Width="200">
-                <ComboBoxItem>Hello World</ComboBoxItem>
-                <ComboBoxItem>Hello World</ComboBoxItem>
-                <ComboBoxItem IsSelected="True">Hello World</ComboBoxItem>
-            </ComboBox>
+            <Calendar />
+            <Calendar SelectionMode="SingleRange" />
         </StackPanel>
         <StackPanel
             HorizontalAlignment="Left"

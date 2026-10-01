@@ -1,0 +1,380 @@
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:tio="https://github.com/tiouoo/TioUi.Avalonia"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <StackPanel
+            Margin="20"
+            Orientation="Horizontal"
+            Spacing="20">
+            <Calendar />
+            <Calendar Classes="between" />
+        </StackPanel>
+    </Design.PreviewWith>
+
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Light">
+            <SolidColorBrush Color="#111827" x:Key="CalendarItemCalendarDayButtonForeground" />
+            <SolidColorBrush
+                Color="{DynamicResource SystemAccentColor}"
+                Opacity="0.3"
+                x:Key="CalendarItemCalendarDayButtonSelectedBackground" />
+            <SolidColorBrush Color="#FFFFFF" x:Key="CalendarItemCalendarDayButtonSelectedForeground" />
+            <SolidColorBrush
+                Color="#111827"
+                Opacity="0.35"
+                x:Key="CalendarItemCalendarDayButtonBlackoutForeground" />
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="Dark">
+            <SolidColorBrush Color="#FFFFFF" x:Key="CalendarItemCalendarDayButtonForeground" />
+            <SolidColorBrush Color="{DynamicResource SystemAccentColorLight1}" x:Key="CalendarItemCalendarDayButtonSelectedBackground" />
+            <SolidColorBrush Color="#111827" x:Key="CalendarItemCalendarDayButtonSelectedForeground" />
+            <SolidColorBrush
+                Color="#FFFFFF"
+                Opacity="0.35"
+                x:Key="CalendarItemCalendarDayButtonBlackoutForeground" />
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+
+    <ControlTemplate TargetType="CalendarItem" x:Key="CalendarItemMiddle">
+        <Border
+            Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            CornerRadius="{DynamicResource OvoCornerRadius}"
+            Padding="16">
+            <Grid
+                HorizontalAlignment="Stretch"
+                MinHeight="{TemplateBinding MinHeight}"
+                MinWidth="{TemplateBinding MinWidth}"
+                RowDefinitions="Auto,*"
+                VerticalAlignment="Stretch">
+                <Grid ColumnDefinitions="Auto,*,Auto" Grid.Row="0">
+                    <RepeatButton
+                        Foreground="{TemplateBinding Foreground}"
+                        Grid.Column="0"
+                        MinWidth="{Binding $self.MinHeight}"
+                        Name="PART_PreviousButton"
+                        Padding="0"
+                        Theme="{StaticResource BasicRepeatButtonTheme}">
+                        <TextBlock
+                            FontFamily="{DynamicResource OvoIconFontFamily}"
+                            FontSize="21"
+                            FontWeight="Light"
+                            Foreground="{DynamicResource InnerForegroundBrush}"
+                            HorizontalAlignment="Center"
+                            Text="&#xe646;"
+                            VerticalAlignment="Center" />
+                    </RepeatButton>
+
+                    <Button
+                        CornerRadius="{DynamicResource OvoBigCornerRadius}"
+                        Foreground="{TemplateBinding Foreground}"
+                        Grid.Column="1"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Center"
+                        Margin="10,0"
+                        Name="PART_HeaderButton" />
+
+                    <RepeatButton
+                        Foreground="{TemplateBinding Foreground}"
+                        Grid.Column="2"
+                        MinWidth="{Binding $self.MinHeight}"
+                        Name="PART_NextButton"
+                        Padding="0"
+                        Theme="{StaticResource BasicRepeatButtonTheme}">
+                        <TextBlock
+                            FontFamily="{DynamicResource OvoIconFontFamily}"
+                            FontSize="21"
+                            FontWeight="Light"
+                            Foreground="{DynamicResource InnerForegroundBrush}"
+                            HorizontalAlignment="Center"
+                            Text="&#xe612;"
+                            VerticalAlignment="Center" />
+                    </RepeatButton>
+                </Grid>
+                <Grid
+                    ColumnDefinitions="*,*,*,*,*,*,*"
+                    Grid.Row="1"
+                    HorizontalAlignment="Stretch"
+                    IsVisible="False"
+                    Name="PART_MonthView">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                </Grid>
+                <Grid
+                    Background="{TemplateBinding Background}"
+                    ColumnDefinitions="*,*,*,*"
+                    Grid.Row="1"
+                    IsVisible="False"
+                    Name="PART_YearView"
+                    RowDefinitions="*,*,*" />
+            </Grid>
+        </Border>
+    </ControlTemplate>
+    <ControlTemplate TargetType="CalendarItem" x:Key="CalendarItemBetween">
+        <Border
+            Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            CornerRadius="{DynamicResource OvoCornerRadius}"
+            Padding="16">
+            <Grid
+                HorizontalAlignment="Stretch"
+                MinHeight="{TemplateBinding MinHeight}"
+                MinWidth="{TemplateBinding MinWidth}"
+                RowDefinitions="Auto,*"
+                VerticalAlignment="Stretch">
+                <Grid ColumnDefinitions="*,Auto,Auto" Grid.Row="0">
+
+                    <Button
+                        CornerRadius="{DynamicResource OvoBigCornerRadius}"
+                        Foreground="{TemplateBinding Foreground}"
+                        Grid.Column="0"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Center"
+                        Margin="0,0,10,0"
+                        Name="PART_HeaderButton" />
+
+                    <RepeatButton
+                        Foreground="{TemplateBinding Foreground}"
+                        Grid.Column="1"
+                        MinWidth="{Binding $self.MinHeight}"
+                        Name="PART_PreviousButton"
+                        Padding="0"
+                        Theme="{StaticResource BasicRepeatButtonTheme}">
+                        <TextBlock
+                            FontFamily="{DynamicResource OvoIconFontFamily}"
+                            FontSize="23"
+                            FontWeight="Light"
+                            Foreground="{DynamicResource InnerForegroundBrush}"
+                            HorizontalAlignment="Center"
+                            Text="&#xe645;"
+                            VerticalAlignment="Center" />
+                    </RepeatButton>
+
+                    <RepeatButton
+                        Foreground="{TemplateBinding Foreground}"
+                        Grid.Column="2"
+                        Margin="5,0,0,0"
+                        MinWidth="{Binding $self.MinHeight}"
+                        Name="PART_NextButton"
+                        Padding="0"
+                        Theme="{StaticResource BasicRepeatButtonTheme}">
+                        <TextBlock
+                            FontFamily="{DynamicResource OvoIconFontFamily}"
+                            FontSize="23"
+                            FontWeight="Light"
+                            Foreground="{DynamicResource InnerForegroundBrush}"
+                            HorizontalAlignment="Center"
+                            Text="&#xe623;"
+                            VerticalAlignment="Center" />
+                    </RepeatButton>
+                </Grid>
+                <Grid
+                    ColumnDefinitions="*,*,*,*,*,*,*"
+                    Grid.Row="1"
+                    HorizontalAlignment="Stretch"
+                    IsVisible="False"
+                    Name="PART_MonthView">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                </Grid>
+                <Grid
+                    Background="{TemplateBinding Background}"
+                    ColumnDefinitions="*,*,*,*"
+                    Grid.Row="1"
+                    IsVisible="False"
+                    Name="PART_YearView"
+                    RowDefinitions="*,*,*" />
+            </Grid>
+        </Border>
+    </ControlTemplate>
+
+    <ControlTheme TargetType="Calendar" x:Key="{x:Type Calendar}">
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+        <Setter Property="Background" Value="{DynamicResource PopupBackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+        <Setter Property="FontFamily" Value="{DynamicResource OvoFontFamily}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="{DynamicResource OvoCornerRadius}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="Calendar">
+                <StackPanel
+                    ClipToBounds="True"
+                    HorizontalAlignment="Center"
+                    Name="PART_Root">
+                    <CalendarItem
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        HeaderBackground="{TemplateBinding HeaderBackground}"
+                        Name="PART_CalendarItem" />
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^.between /template/ CalendarItem">
+            <Setter Property="Template" Value="{DynamicResource CalendarItemBetween}" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme TargetType="CalendarItem" x:Key="{x:Type CalendarItem}">
+        <Setter Property="MinWidth" Value="240" />
+        <Setter Property="MinHeight" Value="250" />
+        <Setter Property="DayTitleTemplate">
+            <Template>
+                <TextBlock
+                    FontSize="12"
+                    FontWeight="600"
+                    Foreground="{DynamicResource ForegroundBrush}"
+                    HorizontalAlignment="Center"
+                    Text="{Binding}"
+                    VerticalAlignment="Center"
+                    x:DataType="x:String" />
+            </Template>
+        </Setter>
+        <Setter Property="Template" Value="{DynamicResource CalendarItemMiddle}" />
+    </ControlTheme>
+
+    <ControlTheme TargetType="CalendarButton" x:Key="{x:Type CalendarButton}">
+        <Setter Property="ClickMode" Value="Release" />
+        <Setter Property="Margin" Value="2" />
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="{DynamicResource OvoCornerRadius}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="ClipToBounds" Value="False" />
+        <Setter Property="MaxHeight" Value="45" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="CalendarButton">
+                <ContentPresenter
+                    Background="{TemplateBinding Background}"
+                    Content="{TemplateBinding Content}"
+                    ContentTemplate="{TemplateBinding ContentTemplate}"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    FontSize="{TemplateBinding FontSize}"
+                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    Margin="{TemplateBinding Padding}"
+                    Name="Content"
+                    RecognizesAccessKey="True"
+                    VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource ControlPointeroverBackground}" />
+        </Style>
+
+        <Style Selector="^:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource ControlPressedBackground}" />
+        </Style>
+
+        <Style Selector="^:selected">
+            <Style Selector="^ /template/ ContentPresenter">
+                <Setter Property="Background" Value="{DynamicResource SystemAccentColorOpacity03}" />
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}" />
+            </Style>
+        </Style>
+
+        <Style Selector="^:blackout /template/ ContentPresenter">
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}" />
+        </Style>
+
+        <Style Selector="^:disabled /template/ ContentPresenter">
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}" />
+        </Style>
+
+        <Style Selector="^:inactive /template/ ContentPresenter">
+            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundColor}" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme TargetType="CalendarDayButton" x:Key="{x:Type CalendarDayButton}">
+        <Setter Property="Margin" Value="2" />
+        <Setter Property="Padding" Value="4" />
+        <Setter Property="Foreground" Value="{DynamicResource CalendarItemCalendarDayButtonForeground}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="{DynamicResource OvoCornerRadius}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="ClipToBounds" Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="CalendarDayButton">
+                <ContentPresenter
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Content="{TemplateBinding Content}"
+                    ContentTemplate="{TemplateBinding ContentTemplate}"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    FontSize="{TemplateBinding FontSize}"
+                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    Name="Content"
+                    Padding="{TemplateBinding Padding}"
+                    RecognizesAccessKey="True"
+                    VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource ControlPointeroverBackground}" />
+        </Style>
+
+        <Style Selector="^:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource ControlPressedBackground}" />
+        </Style>
+
+        <Style Selector="^:today /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
+            <Setter Property="Foreground" Value="{DynamicResource SystemAccentColor}" />
+        </Style>
+
+        <Style Selector="^:selected /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource CalendarItemCalendarDayButtonSelectedBackground}" />
+            <Setter Property="Foreground" Value="{DynamicResource CalendarItemCalendarDayButtonSelectedForeground}" />
+        </Style>
+
+        <Style Selector="^:inactive /template/ ContentPresenter">
+            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundColor}" />
+        </Style>
+
+        <Style Selector="^:blackout /template/ ContentPresenter">
+            <Setter Property="Foreground" Value="{DynamicResource CalendarItemCalendarDayButtonBlackoutForeground}" />
+        </Style>
+
+        <Style Selector="^:disabled /template/ ContentPresenter">
+            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}" />
+        </Style>
+    </ControlTheme>
+</ResourceDictionary>

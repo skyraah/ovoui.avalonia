@@ -37,6 +37,15 @@
         Color="{DynamicResource SystemAccentColor}"
         Opacity="0.2"
         x:Key="SystemAccentColorOpacity02" />
+    <SolidColorBrush
+        Color="{DynamicResource SystemAccentColor}"
+        Opacity="0.3"
+        x:Key="SystemAccentColorOpacity03" />
+    <SolidColorBrush
+        Color="{DynamicResource SystemAccentColor}"
+        Opacity="0.4"
+        x:Key="SystemAccentColorOpacity04" />
+
 
     <SolidColorBrush
         Color="{DynamicResource InfoColor}"
