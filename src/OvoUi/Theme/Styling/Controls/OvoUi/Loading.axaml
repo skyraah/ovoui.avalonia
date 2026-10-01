@@ -1,24 +1,22 @@
 <ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:ovo="https://github.com/tiouoo/ovoui.avalonia"
-    xmlns:tio="https://github.com/tiouoo/TioUi.Avalonia"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.PreviewWith>
-        <StackPanel Margin="20">
-            <ovo:LoadingIcon Classes="Large" />
+        <StackPanel Margin="20" Spacing="12">
+            <ovo:LoadingIcon Classes="large" />
+            <ovo:LoadingIcon Classes="large" Theme="{StaticResource LoadingIconTrailTheme}" />
         </StackPanel>
     </Design.PreviewWith>
 
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Light">
-            <SolidColorBrush Color="#0064FA" x:Key="LoadingIconForeground" />
             <SolidColorBrush
                 Color="#2e3238"
                 Opacity="0.05"
                 x:Key="LoadingMaskBackground" />
         </ResourceDictionary>
         <ResourceDictionary x:Key="Dark">
-            <SolidColorBrush Color="#54a9ff" x:Key="LoadingIconForeground" />
             <SolidColorBrush
                 Color="#ffffff"
                 Opacity="0.12"
@@ -26,9 +24,51 @@
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
 
-    <ControlTheme TargetType="ovo:LoadingIcon" x:Key="{x:Type ovo:LoadingIcon}">
+    <ControlTheme TargetType="ovo:LoadingIcon" x:Key="LoadingIconTheme">
         <Setter Property="IsLoading" Value="True" />
-        <Setter Property="Foreground" Value="{DynamicResource LoadingIconForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource SystemAccentColor}" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="ovo:LoadingIcon">
+                <Arc
+                    Height="20"
+                    IsVisible="{TemplateBinding IsVisible}"
+                    Name="PART_Arc"
+                    StartAngle="0"
+                    Stroke="{TemplateBinding Foreground}"
+                    StrokeJoin="Round"
+                    StrokeLineCap="Round"
+                    StrokeThickness="3"
+                    SweepAngle="240"
+                    Width="20" />
+            </ControlTemplate>
+        </Setter>
+        <Style Selector="^.small /template/ Arc#PART_Arc">
+            <Setter Property="Width" Value="14" />
+            <Setter Property="Height" Value="14" />
+            <Setter Property="StrokeThickness" Value="2" />
+        </Style>
+        <Style Selector="^.large /template/ Arc#PART_Arc">
+            <Setter Property="Width" Value="32" />
+            <Setter Property="Height" Value="32" />
+            <Setter Property="StrokeThickness" Value="5" />
+        </Style>
+        <Style Selector="^[IsLoading=True] /template/ Arc#PART_Arc">
+            <Style.Animations>
+                <Animation Duration="0:0:0.6" IterationCount="Infinite">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="RotateTransform.Angle" Value="0" />
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="RotateTransform.Angle" Value="360" />
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme TargetType="ovo:LoadingIcon" x:Key="LoadingIconTrailTheme">
+        <Setter Property="IsLoading" Value="True" />
+        <Setter Property="Foreground" Value="{DynamicResource SystemAccentColor}" />
         <Setter Property="Template">
             <ControlTemplate TargetType="ovo:LoadingIcon">
                 <Arc
@@ -45,20 +85,20 @@
                         <ConicGradientBrush Angle="50">
                             <GradientStops>
                                 <GradientStop Color="Transparent" Offset="0.4" />
-                                <GradientStop Color="{Binding Foreground, Converter={ovo:BrushToColorConverter}, RelativeSource={RelativeSource TemplatedParent}}" Offset="0.8" />
-                                <GradientStop Color="{Binding Foreground, Converter={ovo:BrushToColorConverter}, RelativeSource={RelativeSource TemplatedParent}}" Offset="1.0" />
+                                <GradientStop Color="{DynamicResource SystemAccentColor}" Offset="0.8" />
+                                <GradientStop Color="{DynamicResource SystemAccentColor}" Offset="1" />
                             </GradientStops>
                         </ConicGradientBrush>
                     </Arc.Stroke>
                 </Arc>
             </ControlTemplate>
         </Setter>
-        <Style Selector="^.Small /template/ Arc#PART_Arc">
+        <Style Selector="^.small /template/ Arc#PART_Arc">
             <Setter Property="Width" Value="14" />
             <Setter Property="Height" Value="14" />
             <Setter Property="StrokeThickness" Value="2" />
         </Style>
-        <Style Selector="^.Large /template/ Arc#PART_Arc">
+        <Style Selector="^.large /template/ Arc#PART_Arc">
             <Setter Property="Width" Value="32" />
             <Setter Property="Height" Value="32" />
             <Setter Property="StrokeThickness" Value="5" />
@@ -67,10 +107,10 @@
             <Style.Animations>
                 <Animation Duration="0:0:0.6" IterationCount="Infinite">
                     <KeyFrame Cue="0%">
-                        <Setter Property="RotateTransform.Angle" Value="0.0" />
+                        <Setter Property="RotateTransform.Angle" Value="0" />
                     </KeyFrame>
                     <KeyFrame Cue="100%">
-                        <Setter Property="RotateTransform.Angle" Value="360.0" />
+                        <Setter Property="RotateTransform.Angle" Value="360" />
                     </KeyFrame>
                 </Animation>
             </Style.Animations>
@@ -81,7 +121,7 @@
         <Setter Property="Background" Value="{DynamicResource LoadingMaskBackground}" />
         <Setter Property="Indicator">
             <Template>
-                <ovo:LoadingIcon IsLoading="{Binding $parent[ovo:Loading].IsLoading, Mode=TwoWay}" />
+                <ovo:LoadingIcon IsLoading="{Binding $parent[ovo:Loading].IsLoading, Mode=TwoWay}" Theme="{StaticResource LoadingIconTheme}" />
             </Template>
         </Setter>
         <Setter Property="Template">
@@ -117,7 +157,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Indicator">
             <Template>
-                <ovo:LoadingIcon IsLoading="{Binding $parent[ovo:LoadingContainer].IsLoading, Mode=TwoWay}" />
+                <ovo:LoadingIcon IsLoading="{Binding $parent[ovo:LoadingContainer].IsLoading, Mode=TwoWay}" Theme="{StaticResource LoadingIconTheme}" />
             </Template>
         </Setter>
         <Setter Property="Template">
@@ -143,4 +183,10 @@
             <Setter Property="Effect" Value="blur(5)" />
         </Style>
     </ControlTheme>
+
+    <ControlTheme
+        BasedOn="{StaticResource LoadingIconTheme}"
+        TargetType="ovo:LoadingIcon"
+        x:Key="{x:Type ovo:LoadingIcon}" />
+
 </ResourceDictionary>
