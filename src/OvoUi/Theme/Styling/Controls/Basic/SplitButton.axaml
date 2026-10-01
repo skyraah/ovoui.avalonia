@@ -1,0 +1,296 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <StackPanel
+            Height="500"
+            Margin="20"
+            Spacing="8"
+            Width="500">
+            <SplitButton Content="Split Button" />
+            <SplitButton Classes="accent" Content="Accent" />
+            <SplitButton Classes="info" Content="Info" />
+            <SplitButton Classes="success" Content="Success" />
+            <SplitButton Classes="warn" Content="Warn" />
+            <SplitButton Classes="danger" Content="Danger" />
+            <ToggleSplitButton Content="Toggle Split Button" IsChecked="True" />
+            <SplitButton Content="Border Split" Theme="{StaticResource BorderSplitButtonTheme}" />
+            <ToggleSplitButton
+                Content="Border Toggle Split"
+                IsChecked="True"
+                Theme="{StaticResource BorderSplitButtonTheme}" />
+        </StackPanel>
+    </Design.PreviewWith>
+
+    <ControlTheme
+        BasedOn="{StaticResource BasicButtonTheme}"
+        TargetType="Button"
+        x:Key="SplitButtonElementTheme">
+        <Setter Property="Padding" Value="20, 8" />
+        <Setter Property="CornerRadius" Value="0" />
+    </ControlTheme>
+
+    <ControlTheme TargetType="SplitButton" x:Key="BasicSplitButtonTheme">
+        <Setter Property="Padding" Value="20, 8" />
+        <Setter Property="MinHeight" Value="32" />
+        <Setter Property="Foreground" Value="{DynamicResource SystemAccentColor}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="CornerRadius" Value="{DynamicResource OvoCornerRadius}" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="FontWeight" Value="{DynamicResource OvoFontWeight}" />
+        <Setter Property="FontFamily" Value="{DynamicResource OvoFontFamily}" />
+        <Setter Property="BackgroundSizing" Value="OuterBorderEdge" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <ControlTemplate TargetType="SplitButton">
+                <Border
+                    Background="{TemplateBinding Background}"
+                    BackgroundSizing="{TemplateBinding BackgroundSizing}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    ClipToBounds="True"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    Name="PART_RootBorder">
+                    <DockPanel>
+                        <Button
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            DockPanel.Dock="Right"
+                            Name="PART_SecondaryButton"
+                            Padding="4,0"
+                            Theme="{DynamicResource SplitButtonElementTheme}"
+                            VerticalAlignment="Stretch">
+                            <TextBlock
+                                FontFamily="{DynamicResource OvoIconFontFamily}"
+                                FontSize="19"
+                                FontWeight="Light"
+                                Foreground="{Binding $parent[Button].Foreground}"
+                                HorizontalAlignment="Center"
+                                Margin="5,0,7,0"
+                                Text="&#xe623;"
+                                VerticalAlignment="Center" />
+                        </Button>
+                        <Rectangle
+                            DockPanel.Dock="Right"
+                            Name="SeparatorBorder"
+                            StrokeThickness="0"
+                            VerticalAlignment="Stretch"
+                            Width="1" />
+                        <Button
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Command="{TemplateBinding Command}"
+                            CommandParameter="{TemplateBinding CommandParameter}"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            DockPanel.Dock="Right"
+                            FontFamily="{TemplateBinding FontFamily}"
+                            FontSize="{TemplateBinding FontSize}"
+                            FontWeight="{TemplateBinding FontWeight}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            Name="PART_PrimaryButton"
+                            Padding="{TemplateBinding Padding}"
+                            Theme="{DynamicResource SplitButtonElementTheme}"
+                            VerticalAlignment="Stretch"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^ /template/ Button">
+            <Setter Property="Foreground" Value="{DynamicResource SystemAccentColor}" />
+            <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="{DynamicResource ControlPointeroverBackground}" />
+            </Style>
+            <Style Selector="^:pressed">
+                <Setter Property="Background" Value="{DynamicResource ControlPressedBackground}" />
+            </Style>
+        </Style>
+        <Style Selector="^ /template/ Rectangle">
+            <Setter Property="Fill" Value="Transparent" />
+        </Style>
+        <Style Selector="^:disabled /template/ Button">
+            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}" />
+            <Setter Property="Background" Value="{DynamicResource ControlDisabledBackground}" />
+        </Style>
+
+        <Style Selector="^.accent /template/ Button">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColor}" />
+            <Setter Property="Foreground" Value="#ffffff" />
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="{DynamicResource SystemAccentColorLight1}" />
+            </Style>
+            <Style Selector="^:pressed">
+                <Setter Property="Background" Value="{DynamicResource SystemAccentColorDark1}" />
+            </Style>
+        </Style>
+        <Style Selector="^.info /template/ Button">
+            <Setter Property="Background" Value="{DynamicResource InfoColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource InfoColor}" />
+            <Setter Property="Foreground" Value="#ffffff" />
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="{DynamicResource InfoPointeroverColor}" />
+            </Style>
+            <Style Selector="^:pressed">
+                <Setter Property="Background" Value="{DynamicResource InfoPressedColor}" />
+            </Style>
+        </Style>
+        <Style Selector="^.success /template/ Button">
+            <Setter Property="Background" Value="{DynamicResource SuccessColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SuccessColor}" />
+            <Setter Property="Foreground" Value="#ffffff" />
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="{DynamicResource SuccessPointeroverColor}" />
+            </Style>
+            <Style Selector="^:pressed">
+                <Setter Property="Background" Value="{DynamicResource SuccessPressedColor}" />
+            </Style>
+        </Style>
+        <Style Selector="^.warn /template/ Button">
+            <Setter Property="Background" Value="{DynamicResource WarnColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource WarnColor}" />
+            <Setter Property="Foreground" Value="#ffffff" />
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="{DynamicResource WarnPointeroverColor}" />
+            </Style>
+            <Style Selector="^:pressed">
+                <Setter Property="Background" Value="{DynamicResource WarnPressedColor}" />
+            </Style>
+        </Style>
+        <Style Selector="^.danger /template/ Button">
+            <Setter Property="Background" Value="{DynamicResource ErrorColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ErrorColor}" />
+            <Setter Property="Foreground" Value="#ffffff" />
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="{DynamicResource ErrorPointeroverColor}" />
+            </Style>
+            <Style Selector="^:pressed">
+                <Setter Property="Background" Value="{DynamicResource ErrorPressedColor}" />
+            </Style>
+        </Style>
+        <Style Selector="^:checked /template/ Button">
+            <Setter Property="Foreground" Value="#ffffff" />
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColor}" />
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="{DynamicResource SystemAccentColorLight1}" />
+            </Style>
+            <Style Selector="^:pressed">
+                <Setter Property="Background" Value="{DynamicResource SystemAccentColorDark1}" />
+            </Style>
+        </Style>
+        <Style Selector="^:checked:disabled /template/ Button">
+            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}" />
+            <Setter Property="Background" Value="{DynamicResource ControlDisabledBackground}" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme
+        BasedOn="{StaticResource BasicSplitButtonTheme}"
+        TargetType="SplitButton"
+        x:Key="SolidSplitButtonTheme">
+        <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
+    </ControlTheme>
+
+    <ControlTheme
+        BasedOn="{StaticResource BasicSplitButtonTheme}"
+        TargetType="SplitButton"
+        x:Key="BorderSplitButtonTheme">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+
+        <Style Selector="^ /template/ Border#PART_RootBorder">
+            <Setter Property="Background" Value="{TemplateBinding Background}" />
+            <Setter Property="BorderBrush" Value="{TemplateBinding BorderBrush}" />
+            <Setter Property="BorderThickness" Value="{TemplateBinding BorderThickness}" />
+        </Style>
+        <Style Selector="^ /template/ Button">
+            <Setter Property="Background" Value="{DynamicResource PopupBackgroundBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="{DynamicResource SystemAccentColorOpacity01}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColor}" />
+            </Style>
+            <Style Selector="^:pressed">
+                <Setter Property="Background" Value="{DynamicResource SystemAccentColorOpacity02}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColorLight1}" />
+            </Style>
+        </Style>
+        <Style Selector="^ /template/ Button#PART_PrimaryButton">
+            <Setter Property="CornerRadius" Value="9,0,0,9" />
+        </Style>
+        <Style Selector="^ /template/ Button#PART_SecondaryButton">
+            <Setter Property="CornerRadius" Value="0,9,9,0" />
+        </Style>
+        <Style Selector="^ /template/ Rectangle">
+            <Setter Property="Fill" Value="{DynamicResource LineBrush}" />
+        </Style>
+        <Style Selector="^:checked">
+            <Setter Property="Foreground" Value="{DynamicResource SystemAccentColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColor}" />
+        </Style>
+        <Style Selector="^:checked /template/ Rectangle">
+            <Setter Property="Fill" Value="{DynamicResource SystemAccentColor}" />
+        </Style>
+        <Style Selector="^:checked /template/ Border#PART_RootBorder">
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColor}" />
+        </Style>
+        <Style Selector="^:checked /template/ Button">
+            <Setter Property="Foreground" Value="{DynamicResource SystemAccentColor}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+        <Style Selector="^:checked:pointerover /template/ Button">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColorOpacity01}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColorLight1}" />
+        </Style>
+        <Style Selector="^:checked:pressed /template/ Button">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColorOpacity02}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColorDark1}" />
+        </Style>
+        <Style Selector="^:disabled /template/ Button">
+            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}" />
+            <Setter Property="Background" Value="{DynamicResource ControlDisabledBackground}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+        </Style>
+        <Style Selector="^:checked:disabled /template/ Button">
+            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}" />
+            <Setter Property="Background" Value="{DynamicResource ControlDisabledBackground}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+        </Style>
+        <Style Selector="^.accent /template/ Button">
+            <Setter Property="Foreground" Value="{DynamicResource SystemAccentColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColor}" />
+        </Style>
+        <Style Selector="^.info /template/ Button">
+            <Setter Property="Foreground" Value="{DynamicResource InfoColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource InfoColor}" />
+        </Style>
+        <Style Selector="^.success /template/ Button">
+            <Setter Property="Foreground" Value="{DynamicResource SuccessColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SuccessColor}" />
+        </Style>
+        <Style Selector="^.warn /template/ Button">
+            <Setter Property="Foreground" Value="{DynamicResource WarnColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource WarnColor}" />
+        </Style>
+        <Style Selector="^.danger /template/ Button">
+            <Setter Property="Foreground" Value="{DynamicResource ErrorColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ErrorColor}" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme
+        BasedOn="{StaticResource BasicSplitButtonTheme}"
+        TargetType="SplitButton"
+        x:Key="{x:Type SplitButton}" />
+</ResourceDictionary>

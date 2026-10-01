@@ -1,9 +1,30 @@
-<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:ovo="https://github.com/tiouoo/ovoui.avalonia"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.PreviewWith>
         <StackPanel HorizontalAlignment="Left" Spacing="16">
             <WrapPanel ItemSpacing="16" LineSpacing="16">
                 <ToggleButton Theme="{StaticResource InputToggleButtonTheme}" />
+                <ToggleButton Content="Default" />
+                <ToggleButton Content="Disabled" IsEnabled="False" />
+                <ToggleButton Content="Checked" IsChecked="True" />
+                <ToggleButton
+                    Content="Checked"
+                    IsChecked="True"
+                    IsEnabled="False" />
+                <ToggleButton Classes="basic" Content="Basic Style" />
+                <ToggleButton
+                    Classes="basic"
+                    Content="Basic Checked"
+                    IsChecked="True" />
+                <ToggleButton Content="Border" Theme="{StaticResource BorderToggleButtonTheme}" />
+                <ToggleButton
+                    Content="Border Checked"
+                    IsChecked="True"
+                    Theme="{StaticResource BorderToggleButtonTheme}" />
+                <ToggleButton Content="Light" Theme="{StaticResource LightToggleButton}" />
+                <ToggleButton Content="Transparent" Theme="{StaticResource TransparentToggleButton}" />
             </WrapPanel>
         </StackPanel>
     </Design.PreviewWith>
@@ -42,4 +63,157 @@
             </ControlTemplate>
         </Setter>
     </ControlTheme>
+
+    <ControlTheme
+        BasedOn="{StaticResource {x:Type Button}}"
+        TargetType="ToggleButton"
+        x:Key="{x:Type ToggleButton}">
+        <Style Selector="^:checked">
+            <Setter Property="FocusAdorner">
+                <FocusAdornerTemplate>
+                    <Border Classes="solid" Theme="{DynamicResource AdornerLayerBorder}" />
+                </FocusAdornerTemplate>
+            </Setter>
+            <Setter Property="Foreground" Value="#ffffff" />
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColor}" />
+            <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                <Setter Property="Background" Value="{DynamicResource SystemAccentColorLight1}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColorLight1}" />
+            </Style>
+            <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+                <Setter Property="Foreground" Value="#ffffff" />
+                <Setter Property="Background" Value="{DynamicResource SystemAccentColorDark1}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColorDark1}" />
+            </Style>
+            <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
+                <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}" />
+            </Style>
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme
+        BasedOn="{StaticResource {x:Type Button}}"
+        TargetType="ToggleButton"
+        x:Key="LightToggleButton">
+        <Style Selector="^">
+            <Setter Property="FocusAdorner">
+                <FocusAdornerTemplate>
+                    <Border Classes="solid" Theme="{DynamicResource AdornerLayerBorder}" />
+                </FocusAdornerTemplate>
+            </Setter>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+        </Style>
+        <Style Selector="^:checked">
+            <Setter Property="FocusAdorner">
+                <FocusAdornerTemplate>
+                    <Border Classes="solid" Theme="{DynamicResource AdornerLayerBorder}" />
+                </FocusAdornerTemplate>
+            </Setter>
+            <Setter Property="Foreground" Value="{DynamicResource SystemAccentColor}" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme
+        BasedOn="{StaticResource {x:Type Button}}"
+        TargetType="ToggleButton"
+        x:Key="TransparentToggleButton">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+        <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+        </Style>
+        <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+        </Style>
+        <Style Selector="^:disabled">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme
+        BasedOn="{StaticResource {x:Type Button}}"
+        TargetType="ToggleButton"
+        x:Key="BasicToggleButtonTheme">
+        <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="CornerRadius" Value="{DynamicResource OvoCornerRadius}" />
+        <Setter Property="Foreground" Value="{DynamicResource SystemAccentColor}" />
+        <Setter Property="Transitions">
+            <ovo:OvoTransitions />
+        </Setter>
+        <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource ControlPointeroverBackground}" />
+        </Style>
+        <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource ControlPressedBackground}" />
+        </Style>
+        <Style Selector="^:checked /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColor}" />
+            <Setter Property="Foreground" Value="#ffffff" />
+        </Style>
+        <Style Selector="^:checked:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColorLight1}" />
+        </Style>
+        <Style Selector="^:checked:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColorDark1}" />
+        </Style>
+        <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme
+        BasedOn="{StaticResource {x:Type Button}}"
+        TargetType="ToggleButton"
+        x:Key="BorderToggleButtonTheme">
+        <Setter Property="Background" Value="{DynamicResource PopupBackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="{DynamicResource OvoCornerRadius}" />
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+
+        <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColorOpacity01}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColor}" />
+        </Style>
+        <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColorOpacity02}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColorLight1}" />
+        </Style>
+        <Style Selector="^:checked">
+            <Setter Property="Foreground" Value="{DynamicResource SystemAccentColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColor}" />
+            <Setter Property="FocusAdorner">
+                <FocusAdornerTemplate>
+                    <Border Classes="solid" Theme="{DynamicResource AdornerLayerBorder}" />
+                </FocusAdornerTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="^:checked /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Foreground" Value="{DynamicResource SystemAccentColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColor}" />
+        </Style>
+        <Style Selector="^:checked:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColorOpacity01}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColorLight1}" />
+        </Style>
+        <Style Selector="^:checked:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColorOpacity02}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColorDark1}" />
+        </Style>
+        <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+        </Style>
+    </ControlTheme>
+
 </ResourceDictionary>
