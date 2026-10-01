@@ -74,4 +74,6 @@
         Opacity="0.2"
         x:Key="ErrorColorOpacity02" />
 
+    <BoxShadows x:Key="TransparentBoxShadow">0 0 8 1 #00000000</BoxShadows>
+
 </ResourceDictionary>

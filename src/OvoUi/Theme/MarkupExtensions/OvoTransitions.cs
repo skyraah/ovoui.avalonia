@@ -1,7 +1,10 @@
+using System;
+using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Animation;
 using Avalonia.Controls;
 using Avalonia.Controls.Documents;
+using Avalonia.Media;
 using Avalonia.Markup.Xaml;
 
 namespace OvoUi.Theme.MarkupExtensions;
@@ -13,22 +16,61 @@ public abstract class OvoTransitionExtension : MarkupExtension
     protected virtual TimeSpan Duration =>
         TimeSpan.FromMilliseconds(100);
 
+    private static readonly Dictionary<Type, Func<TimeSpan, AvaloniaProperty, ITransition>>
+        TransitionFactories =
+        new()
+        {
+            {
+                typeof(IBrush),
+                (duration, property) => new BrushTransition
+                {
+                    Duration = duration,
+                    Property = property
+                }
+            },
+
+            {
+                typeof(BoxShadows),
+                (duration, property) => new BoxShadowsTransition
+                {
+                    Duration = duration,
+                    Property = property
+                }
+            }
+        };
+
+
     public override object ProvideValue(IServiceProvider serviceProvider)
     {
         var transitions = new Transitions();
 
         foreach (var property in Properties)
         {
-            transitions.Add(new BrushTransition
-            {
-                Duration = Duration,
-                Property = property
-            });
+            transitions.Add(CreateTransition(property));
         }
 
         return transitions;
     }
+
+
+    private ITransition CreateTransition(AvaloniaProperty property)
+    {
+        var propertyType = property.PropertyType;
+
+        foreach (var factory in TransitionFactories)
+        {
+            if (factory.Key.IsAssignableFrom(propertyType))
+            {
+                return factory.Value(Duration, property);
+            }
+        }
+
+        throw new NotSupportedException(
+            $"OvoTransition does not support property '{property.Name}' " +
+            $"with type '{propertyType.Name}'.");
+    }
 }
+
 
 public class OvoTransitions : OvoTransitionExtension
 {
@@ -36,9 +78,11 @@ public class OvoTransitions : OvoTransitionExtension
     [
         Border.BackgroundProperty,
         TextElement.ForegroundProperty,
-        Border.BorderBrushProperty
+        Border.BorderBrushProperty,
+        Border.BoxShadowProperty,
     ];
 }
+
 
 public class OvoBackgroundTransitions : OvoTransitionExtension
 {
@@ -48,6 +92,16 @@ public class OvoBackgroundTransitions : OvoTransitionExtension
     ];
 }
 
+
+public class OvoBoxShadowTransitions : OvoTransitionExtension
+{
+    protected override IEnumerable<AvaloniaProperty> Properties =>
+    [
+        Border.BoxShadowProperty
+    ];
+}
+
+
 public class OvoForegroundTransitions : OvoTransitionExtension
 {
     protected override IEnumerable<AvaloniaProperty> Properties =>
@@ -55,6 +109,7 @@ public class OvoForegroundTransitions : OvoTransitionExtension
         TextElement.ForegroundProperty
     ];
 }
+
 
 public class OvoBorderTransitions : OvoTransitionExtension
 {

@@ -11,6 +11,12 @@
             <Border Classes="interactive" Theme="{StaticResource CardBorderTheme}">
                 <TextBlock>Hello</TextBlock>
             </Border>
+            <Border Classes="interactive_shadow" Theme="{StaticResource CardBorderTheme}">
+                <TextBlock>Hello</TextBlock>
+            </Border>
+            <Border Classes="shadow" Theme="{StaticResource CardBorderTheme}">
+                <TextBlock>Hello</TextBlock>
+            </Border>
         </StackPanel>
     </Design.PreviewWith>
 
@@ -20,6 +26,8 @@
         <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
         <Setter Property="BorderThickness" Value="1.2" />
         <Setter Property="CornerRadius" Value="{DynamicResource OvoBigCornerRadius}" />
+        <Setter Property="BoxShadow" Value="{DynamicResource TransparentBoxShadow}" />
+
         <Setter Property="Transitions">
             <ovo:OvoTransitions />
         </Setter>
@@ -27,6 +35,23 @@
         <Style Selector="^.interactive:pointerover">
             <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColor}" />
         </Style>
+
+        <Style Selector="^.interactive_shadow:pointerover">
+            <Setter Property="BoxShadow" Value="{DynamicResource PopupBoxShadow}" />
+        </Style>
+
+        <Style Selector="^.shadow">
+            <Setter Property="BoxShadow" Value="{DynamicResource PopupBoxShadow}" />
+        </Style>
+
+    </ControlTheme>
+
+    <ControlTheme
+        BasedOn="{StaticResource CardBorderTheme}"
+        TargetType="Border"
+        x:Key="TranslucentCardBorderTheme">
+        <Setter Property="Background" Value="{DynamicResource TranslucentBackgroundColor}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource TranslucentBorderBrush}" />
     </ControlTheme>
 
 </ResourceDictionary>
