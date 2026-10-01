@@ -1,0 +1,285 @@
+﻿<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:ovo="https://github.com/tiouoo/ovoui.avalonia"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <StackPanel Margin="20">
+            <ovo:IconButton Content="Button">
+                <ovo:IconButton.Icon>
+                    <PathIcon
+                        Data="M192 0c-41.8 0-77.4 26.7-90.5 64L64 64C28.7 64 0 92.7 0 128L0 448c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64l-37.5 0C269.4 26.7 233.8 0 192 0zm0 64a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM112 192l160 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-160 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z"
+                        Height="16"
+                        Margin="0,-1,0,0"
+                        Width="14" />
+                </ovo:IconButton.Icon>
+            </ovo:IconButton>
+            <ovo:IconButton Classes="danger" Content="Button">
+                <ovo:IconButton.Icon>
+                    <Geometry>M192 0c-41.8 0-77.4 26.7-90.5 64L64 64C28.7 64 0 92.7 0 128L0 448c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64l-37.5 0C269.4 26.7 233.8 0 192 0zm0 64a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM112 192l160 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-160 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z</Geometry>
+                </ovo:IconButton.Icon>
+            </ovo:IconButton>
+        </StackPanel>
+    </Design.PreviewWith>
+
+    <ovo:BooleansToOpacityConverter x:Key="OpacityConverter" />
+
+    <ControlTemplate TargetType="ContentControl" x:Key="IconButtonTemplate">
+        <Border
+            Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            CornerRadius="{TemplateBinding CornerRadius}"
+            Name="PART_Background"
+            Padding="{TemplateBinding Padding}"
+            TextElement.FontSize="{TemplateBinding FontSize}"
+            TextElement.FontWeight="{TemplateBinding FontWeight}"
+            UseLayoutRounding="False">
+            <ReversibleStackPanel
+                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                Name="{x:Static ovo:IconButton.PART_RootPanel}"
+                Orientation="Horizontal"
+                Spacing="8"
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                <Panel Name="PART_IconRoot">
+                    <Panel.IsVisible>
+                        <MultiBinding Converter="{x:Static BoolConverters.Or}">
+                            <Binding Path="(ovo:IconButton.IsLoading)" RelativeSource="{RelativeSource TemplatedParent}" />
+                            <Binding
+                                Converter="{x:Static ObjectConverters.IsNotNull}"
+                                Path="(ovo:IconButton.Icon)"
+                                RelativeSource="{RelativeSource TemplatedParent}" />
+                        </MultiBinding>
+                    </Panel.IsVisible>
+                    <ContentPresenter
+                        Content="{TemplateBinding (ovo:IconButton.Icon)}"
+                        ContentTemplate="{TemplateBinding (ovo:IconButton.IconTemplate)}"
+                        Foreground="{DynamicResource SystemAccentColor}"
+                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        Opacity="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=!(ovo:IconButton.IsLoading), Converter={StaticResource OpacityConverter}}"
+                        RecognizesAccessKey="True">
+                        <ContentPresenter.Styles>
+                            <Style Selector="PathIcon">
+                                <Setter Property="Foreground" Value="{DynamicResource SystemAccentColor}" />
+                            </Style>
+                            <Style Selector="ovo|IconButton.danger PathIcon">
+                                <Setter Property="Foreground" Value="White" />
+                            </Style>
+                            <Style Selector="ovo|IconToggleButton.danger PathIcon">
+                                <Setter Property="Foreground" Value="{DynamicResource ErrorColor}" />
+                            </Style>
+                            <Style Selector="ovo|IconToggleButton:checked PathIcon">
+                                <Setter Property="Foreground" Value="White" />
+                            </Style>
+                        </ContentPresenter.Styles>
+                        <ContentPresenter.DataTemplates>
+                            <DataTemplate DataType="Geometry">
+                                <PathIcon
+                                    Data="{Binding}"
+                                    Foreground="{DynamicResource SystemAccentColor}"
+                                    Height="16"
+                                    Width="16" />
+                            </DataTemplate>
+                        </ContentPresenter.DataTemplates>
+                    </ContentPresenter>
+                    <ovo:LoadingIcon
+                        Classes="Small"
+                        Foreground="{TemplateBinding Foreground}"
+                        IsLoading="{TemplateBinding (ovo:IconButton.IsLoading)}"
+                        IsVisible="{TemplateBinding (ovo:IconButton.IsLoading)}" />
+                </Panel>
+                <ContentPresenter
+                    Content="{TemplateBinding Content}"
+                    HorizontalAlignment="Center"
+                    IsVisible="{TemplateBinding Content,
+                                                Converter={x:Static ObjectConverters.IsNotNull}}"
+                    Name="PART_ContentPresenter"
+                    RecognizesAccessKey="True"
+                    VerticalAlignment="Center" />
+            </ReversibleStackPanel>
+        </Border>
+    </ControlTemplate>
+
+    <ControlTheme TargetType="ContentControl" x:Key="BaseIconButton">
+        <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource SystemAccentColor}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="{DynamicResource OvoCornerRadius}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="20, 8" />
+        <Setter Property="RenderTransform" Value="none" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="FontWeight" Value="{DynamicResource OvoFontWeight}" />
+        <Setter Property="FontFamily" Value="{DynamicResource OvoFontFamily}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="MinHeight" Value="32" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition
+                    Duration="0:0:0.3"
+                    Easing="CircularEaseOut"
+                    Property="Foreground" />
+                <BrushTransition
+                    Duration="0:0:0.3"
+                    Easing="CircularEaseOut"
+                    Property="Background" />
+            </Transitions>
+        </Setter>
+
+        <Style Selector="^:pointerover">
+            <Setter Property="Background" Value="{DynamicResource ControlPointeroverBackground}" />
+        </Style>
+
+        <Style Selector="^:pressed">
+            <Setter Property="Background" Value="{DynamicResource ControlPressedBackground}" />
+        </Style>
+
+        <Style Selector="^:disabled">
+            <Setter Property="Background" Value="{DynamicResource ControlDisabledBackground}" />
+            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}" />
+        </Style>
+
+        <Style Selector="^.danger">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="{DynamicResource ErrorColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ErrorColor}" />
+        </Style>
+
+        <Style Selector="^.danger:pointerover">
+            <Setter Property="Foreground" Value="#f8f9fa" />
+            <Setter Property="Background" Value="{DynamicResource ErrorPointeroverColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ErrorPointeroverColor}" />
+        </Style>
+
+        <Style Selector="^.danger:pressed">
+            <Setter Property="Background" Value="{DynamicResource ErrorPressedColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ErrorPressedColor}" />
+        </Style>
+
+        <Style Selector="^.danger:disabled">
+            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}" />
+            <Setter Property="Background" Value="{DynamicResource ControlDisabledBackground}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+        </Style>
+
+        <Style Selector="^.accent">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColor}" />
+        </Style>
+
+        <Style Selector="^.accent:pointerover">
+            <Setter Property="Foreground" Value="#f8f9fa" />
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColorLight1}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColorLight1}" />
+        </Style>
+
+        <Style Selector="^.accent:pressed">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColorDark1}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColorDark1}" />
+        </Style>
+
+        <Style Selector="^.accent:disabled">
+            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}" />
+            <Setter Property="Background" Value="{DynamicResource ControlDisabledBackground}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+        </Style>
+
+
+        <Style Selector="^.Float /template/ ReversibleStackPanel#PART_RootPanel">
+            <Setter Property="Spacing" Value="0" />
+        </Style>
+        <Style Selector="^.Float /template/ Panel#PART_IconRoot">
+            <Setter Property="Margin" Value="-21,0,8,0" />
+            <Setter Property="Opacity" Value="0" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition
+                        Duration="0:0:0.2"
+                        Easing="CircularEaseOut"
+                        Property="Opacity" />
+                    <ThicknessTransition
+                        Duration="0:0:0.2"
+                        Easing="CircularEaseOut"
+                        Property="Margin" />
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="^.Float:pointerover /template/ Panel#PART_IconRoot">
+            <Setter Property="Margin" Value="0,0,8,0" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+
+
+        <Style Selector="^:right /template/ ReversibleStackPanel#PART_RootPanel">
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="ReverseOrder" Value="True" />
+        </Style>
+
+        <Style Selector="^:left /template/ ReversibleStackPanel#PART_RootPanel">
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="ReverseOrder" Value="False" />
+        </Style>
+
+        <Style Selector="^:top /template/ ReversibleStackPanel#PART_RootPanel">
+            <Setter Property="Orientation" Value="Vertical" />
+            <Setter Property="ReverseOrder" Value="False" />
+        </Style>
+
+        <Style Selector="^:bottom /template/ ReversibleStackPanel#PART_RootPanel">
+            <Setter Property="Orientation" Value="Vertical" />
+            <Setter Property="ReverseOrder" Value="True" />
+        </Style>
+
+        <Style Selector="^.Large">
+            <Setter Property="MinHeight" Value="40" />
+            <Setter Property="Padding" Value="16, 0" />
+        </Style>
+
+        <Style Selector="^.Small">
+            <Setter Property="MinHeight" Value="24" />
+            <Setter Property="Padding" Value="6, 0" />
+        </Style>
+
+        <Style Selector="^:empty-content">
+            <Setter Property="MinWidth" Value="{Binding $self.MinHeight}" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+    </ControlTheme>
+
+    <ControlTheme
+        BasedOn="{StaticResource BaseIconButton}"
+        TargetType="ovo:IconButton"
+        x:Key="{x:Type ovo:IconButton}">
+        <Setter Property="Template" Value="{StaticResource IconButtonTemplate}" />
+    </ControlTheme>
+
+    <ControlTheme
+        BasedOn="{StaticResource BaseIconButton}"
+        TargetType="ContentControl"
+        x:Key="BaseOutlineIconButton">
+        <Style Selector="^ /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource PopupBackgroundBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+        <Style Selector="^:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColorOpacity01}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColor}" />
+        </Style>
+        <Style Selector="^:pressed /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColorOpacity02}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColorLight1}" />
+        </Style>
+
+        <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}" />
+        </Style>
+        <Style Selector="^:disabled /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource PopupBackgroundBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+        </Style>
+    </ControlTheme>
+</ResourceDictionary>
