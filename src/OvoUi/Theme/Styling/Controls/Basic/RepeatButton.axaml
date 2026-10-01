@@ -7,38 +7,38 @@
             Margin="16"
             Orientation="Horizontal"
             Spacing="16">
-            <Button Classes="transparent" Content="Click Me" />
-            <Button Classes="info" Content="Click Me" />
-            <Button Classes="success" Content="Click Me" />
-            <Button Classes="warn" Content="Click Me" />
-            <Button Classes="danger" Content="Click Me" />
-            <Button Content="Click Me" IsEnabled="False" />
-            <Button Content="Click Me" Theme="{StaticResource BorderButtonTheme}" />
-            <Button
+            <RepeatButton Classes="transparent" Content="Click Me" />
+            <RepeatButton Classes="info" Content="Click Me" />
+            <RepeatButton Classes="success" Content="Click Me" />
+            <RepeatButton Classes="warn" Content="Click Me" />
+            <RepeatButton Classes="danger" Content="Click Me" />
+            <RepeatButton Content="Click Me" IsEnabled="False" />
+            <RepeatButton Content="Click Me" Theme="{StaticResource BorderRepeatButtonTheme}" />
+            <RepeatButton
                 Content="Click Me"
                 IsEnabled="False"
-                Theme="{StaticResource BorderButtonTheme}" />
-            <Button
+                Theme="{StaticResource BorderRepeatButtonTheme}" />
+            <RepeatButton
                 Classes="info"
                 Content="Click Me"
-                Theme="{StaticResource BorderButtonTheme}" />
-            <Button
+                Theme="{StaticResource BorderRepeatButtonTheme}" />
+            <RepeatButton
                 Classes="success"
                 Content="Click Me"
-                Theme="{StaticResource BorderButtonTheme}" />
-            <Button
+                Theme="{StaticResource BorderRepeatButtonTheme}" />
+            <RepeatButton
                 Classes="warn"
                 Content="Click Me"
-                Theme="{StaticResource BorderButtonTheme}" />
-            <Button
+                Theme="{StaticResource BorderRepeatButtonTheme}" />
+            <RepeatButton
                 Classes="danger"
                 Content="Click Me"
-                Theme="{StaticResource BorderButtonTheme}" />
+                Theme="{StaticResource BorderRepeatButtonTheme}" />
 
         </StackPanel>
     </Design.PreviewWith>
 
-    <ControlTheme TargetType="Button" x:Key="BasicButtonTheme">
+    <ControlTheme TargetType="RepeatButton" x:Key="BasicRepeatButtonTheme">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -52,7 +52,7 @@
             <ovo:OvoTransitions />
         </Setter>
         <Setter Property="Template">
-            <ControlTemplate TargetType="Button">
+            <ControlTemplate TargetType="RepeatButton">
                 <ContentPresenter
                     BackgroundSizing="{TemplateBinding BackgroundSizing}"
                     BorderThickness="{TemplateBinding BorderThickness}"
@@ -83,9 +83,9 @@
     </ControlTheme>
 
     <ControlTheme
-        BasedOn="{StaticResource BasicButtonTheme}"
-        TargetType="Button"
-        x:Key="BorderButtonTheme">
+        BasedOn="{StaticResource BasicRepeatButtonTheme}"
+        TargetType="RepeatButton"
+        x:Key="BorderRepeatButtonTheme">
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Background" Value="{DynamicResource PopupBackgroundBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
@@ -175,9 +175,9 @@
     </ControlTheme>
 
     <ControlTheme
-        BasedOn="{StaticResource BasicButtonTheme}"
-        TargetType="Button"
-        x:Key="SolidButtonTheme">
+        BasedOn="{StaticResource BasicRepeatButtonTheme}"
+        TargetType="RepeatButton"
+        x:Key="SolidRepeatButtonTheme">
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="CornerRadius" Value="{DynamicResource OvoCornerRadius}" />
         <Setter Property="Padding" Value="20, 8" />
@@ -259,8 +259,8 @@
     </ControlTheme>
 
     <ControlTheme
-        BasedOn="{StaticResource SolidButtonTheme}"
-        TargetType="Button"
-        x:Key="{x:Type Button}" />
+        BasedOn="{StaticResource SolidRepeatButtonTheme}"
+        TargetType="RepeatButton"
+        x:Key="{x:Type RepeatButton}" />
 
 </ResourceDictionary>
