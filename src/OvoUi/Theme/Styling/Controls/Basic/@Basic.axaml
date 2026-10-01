@@ -11,5 +11,6 @@
         <ResourceInclude Source="ButtonSpinner.axaml" />
         <ResourceInclude Source="CheckBox.axaml" />
         <ResourceInclude Source="DataValidationErrors.axaml" />
+        <ResourceInclude Source="Calendar.axaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
