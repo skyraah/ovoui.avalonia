@@ -1,0 +1,171 @@
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:collections="clr-namespace:System.Collections;assembly=netstandard"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Design.PreviewWith>
+        <StackPanel HorizontalAlignment="Left" Spacing="20">
+            <CalendarDatePicker Width="300">
+                <DataValidationErrors.Error>
+                    <system:Exception />
+                </DataValidationErrors.Error>
+            </CalendarDatePicker>
+            <ComboBox Width="300">
+                <ComboBoxItem>AAA</ComboBoxItem>
+                <ComboBoxItem>BBB</ComboBoxItem>
+                <DataValidationErrors.Error>
+                    <system:Exception />
+                </DataValidationErrors.Error>
+            </ComboBox>
+            <DatePicker Width="300">
+                <DataValidationErrors.Error>
+                    <system:Exception />
+                </DataValidationErrors.Error>
+            </DatePicker>
+            <NumericUpDown Width="300">
+                <DataValidationErrors.Error>
+                    <system:Exception />
+                </DataValidationErrors.Error>
+            </NumericUpDown>
+            <Slider Width="300">
+                <DataValidationErrors.Error>
+                    <system:Exception />
+                </DataValidationErrors.Error>
+            </Slider>
+            <TimePicker Width="300">
+                <DataValidationErrors.Error>
+                    <system:Exception />
+                </DataValidationErrors.Error>
+            </TimePicker>
+            <TextBox
+                InnerLeftContent="http://"
+                InnerRightContent=".com"
+                Width="300">
+                <DataValidationErrors.Error>
+                    <system:Exception />
+                </DataValidationErrors.Error>
+            </TextBox>
+            <TextBox
+                InnerLeftContent="http://"
+                InnerRightContent=".com"
+                Width="300">
+                <TextBox.Styles>
+                    <Style Selector="TextBox /template/ DataValidationErrors">
+                        <Setter Property="Theme" Value="{DynamicResource TooltipDataValidationErrors}" />
+                    </Style>
+                </TextBox.Styles>
+                <DataValidationErrors.Error>
+                    <system:Exception />
+                </DataValidationErrors.Error>
+            </TextBox>
+        </StackPanel>
+    </Design.PreviewWith>
+
+    <ControlTheme TargetType="DataValidationErrors" x:Key="{x:Type DataValidationErrors}">
+        <Setter Property="Template">
+            <ControlTemplate TargetType="DataValidationErrors">
+                <DockPanel LastChildFill="True">
+                    <ContentControl
+                        Content="{Binding (DataValidationErrors.Errors)}"
+                        ContentTemplate="{TemplateBinding ErrorTemplate}"
+                        DataContext="{TemplateBinding Owner}"
+                        DockPanel.Dock="Bottom"
+                        IsVisible="{Binding (DataValidationErrors.HasErrors)}"
+                        Margin="0,4,0,0"
+                        Name="InlineDataValidationContentControl" />
+                    <ContentPresenter
+                        Background="{TemplateBinding Background}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Content="{TemplateBinding Content}"
+                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Name="PART_ContentPresenter"
+                        Padding="{TemplateBinding Padding}" />
+                </DockPanel>
+            </ControlTemplate>
+        </Setter>
+        <Setter Property="ErrorTemplate">
+            <DataTemplate>
+                <ItemsControl
+                    Foreground="{DynamicResource ErrorColor}"
+                    ItemsSource="{Binding}"
+                    x:DataType="DataValidationErrors">
+                    <ItemsControl.Styles>
+                        <Style Selector="TextBlock">
+                            <Setter Property="TextWrapping" Value="Wrap" />
+                            <Setter Property="Foreground" Value="{DynamicResource ErrorColor}" />
+                        </Style>
+                    </ItemsControl.Styles>
+                </ItemsControl>
+            </DataTemplate>
+        </Setter>
+    </ControlTheme>
+
+    <ControlTheme TargetType="DataValidationErrors" x:Key="SilentDataValidationErrors">
+        <Setter Property="Template">
+            <ControlTemplate TargetType="DataValidationErrors">
+                <ContentPresenter
+                    Background="{TemplateBinding Background}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Content="{TemplateBinding Content}"
+                    ContentTemplate="{TemplateBinding ContentTemplate}"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    Name="PART_ContentPresenter"
+                    Padding="{TemplateBinding Padding}" />
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+    <ControlTheme TargetType="DataValidationErrors" x:Key="TooltipDataValidationErrors">
+        <Setter Property="Template">
+            <ControlTemplate TargetType="DataValidationErrors">
+                <DockPanel LastChildFill="True">
+                    <ContentControl
+                        Content="{Binding (DataValidationErrors.Errors)}"
+                        ContentTemplate="{TemplateBinding ErrorTemplate}"
+                        DataContext="{TemplateBinding Owner}"
+                        DockPanel.Dock="Right"
+                        IsVisible="{Binding (DataValidationErrors.HasErrors)}" />
+                    <ContentPresenter
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Content="{TemplateBinding Content}"
+                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Name="PART_ContentPresenter"
+                        Padding="{TemplateBinding Padding}" />
+                </DockPanel>
+            </ControlTemplate>
+        </Setter>
+        <Setter Property="ErrorTemplate">
+            <DataTemplate>
+                <Panel Background="Transparent" Name="PART_InlineErrorTemplatePanel">
+                    <Panel.Styles>
+                        <Style Selector="Panel#PART_InlineErrorTemplatePanel">
+                            <Setter Property="Margin" Value="8,0" />
+                        </Style>
+                        <Style Selector="Panel#PART_InlineErrorTemplatePanel ToolTip">
+                            <Setter Property="BorderBrush" Value="{DynamicResource ErrorColor}" />
+                        </Style>
+                        <Style Selector="Panel#PART_InlineErrorTemplatePanel ToolTip TextBlock">
+                            <Setter Property="TextWrapping" Value="Wrap" />
+                        </Style>
+                    </Panel.Styles>
+                    <ToolTip.Tip>
+                        <ItemsControl ItemsSource="{Binding}" x:DataType="collections:IEnumerable" />
+                    </ToolTip.Tip>
+                    <TextBlock
+                        FontFamily="{DynamicResource OvoIconFontFamily}"
+                        FontSize="16"
+                        FontWeight="Light"
+                        Foreground="{DynamicResource ErrorColor}"
+                        HorizontalAlignment="Center"
+                        Text="&#xe649;"
+                        VerticalAlignment="Center" />
+                </Panel>
+            </DataTemplate>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>

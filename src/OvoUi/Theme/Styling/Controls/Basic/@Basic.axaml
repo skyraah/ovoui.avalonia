@@ -5,7 +5,9 @@
         <ResourceInclude Source="TextBox.axaml" />
         <ResourceInclude Source="ComboBox.axaml" />
         <ResourceInclude Source="AdornerLayer.axaml" />
-        <ResourceInclude Source="Button.axaml" />
+        <ResourceInclude Source="Border.axaml" />
+        <ResourceInclude Source="ButtonSpinner.axaml" />
         <ResourceInclude Source="CheckBox.axaml" />
+        <ResourceInclude Source="DataValidationErrors.axaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
